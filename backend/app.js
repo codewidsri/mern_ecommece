@@ -4,6 +4,9 @@ const dotenv = require('dotenv');
 const path = require('path');
 const cors = require('cors');
 const connectDatabase = require('./config/connectDatabase');
+
+const userRoutes = require('./routes/userRoutes');
+
 dotenv.config({path: path.join(__dirname, 'config', 'config.env')})
 
 const products = require('./routes/product');
@@ -16,6 +19,9 @@ app.use(cors());
 
 app.use('/api/v1/',products);
 app.use('/api/v1/',orders);
+app.use('/api/v1/users', userRoutes);
+
+
 
 
 app.listen(process.env.PORT, () => {

@@ -1,0 +1,64 @@
+/* Styling for Login Form */
+.login-form {
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 50px auto;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .login-form h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .login-form button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Message Styling */
+  .login-form p {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .login-form {
+      padding: 15px 20px;
+    }
+  
+    .login-form input,
+    .login-form button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  
