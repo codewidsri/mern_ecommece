@@ -51,7 +51,6 @@ export default function ProductDetail({cartItems, setCartItems}) {
                         <div className="rating-outer">
                             <div className="rating-inner" style={{width : `${product.ratings/5 * 100}%`}}></div>
                         </div>
-                
 
                         <hr />
 

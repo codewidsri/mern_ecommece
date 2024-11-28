@@ -7,6 +7,6 @@ const orderSchema = new mongoose.Schema({
     createdAt: Date
 })
 
-const orderModel = mongoose.model('Order', orderSchema);
+const orderModel = mongoose.model('orders', orderSchema);
 
 module.exports = orderModel;

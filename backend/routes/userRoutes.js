@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const User = require('../models/User');
 const generateToken = require('../utils/generateToken');
-const { protect } = require('../middleware/authMiddleware');
+const { protect, UserMiddleware } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
@@ -19,7 +19,7 @@ router.post('/register', asyncHandler(async (req, res) => {
   const user = await User.create({ name, email, password });
 
   if (user) {
-    res.status(201).json({
+    return res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
@@ -38,16 +38,15 @@ router.post('/login', asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email });
   if (user && (await user.matchPassword(password))) {
-    res.json({
+    res.status(200).json({
       _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: generateToken(user._id),
+      token: generateToken(user._id)
     });
-  } else {
-    res.status(401);
-    throw new Error('Invalid email or password');
+    } else { 
+    res.status(401).json({ message: "Invalid email or password" });
   }
 }));
 
@@ -64,6 +63,16 @@ router.get('/profile', protect, asyncHandler(async (req, res) => {
   } else {
     res.status(404);
     throw new Error('User not found');
+  }
+}));
+
+// /api/v1/users/home
+router.get("/home", protect, asyncHandler(async (req, res) => {
+  const user = req.user;
+  if (user) {
+    res.json({ _id: user._id, name: user.name, email: user.email });
+  } else {
+    res.status(404).json({ message: "User not found" });
   }
 }));
 
