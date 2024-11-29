@@ -1,13 +1,15 @@
 import './LoginScreen.css'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
+import { Authcontext } from '../authcontext/Authcontext';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState(null);
-  const navigate = useNavigate();
+  const {setuser}= useContext(Authcontext);
+  const navigate=useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -19,7 +21,8 @@ const LoginScreen = () => {
       const response = await axios.post(process.env.REACT_APP_API_URL+'users/login', { email, password },config);
       const token = response.data.token; // Get token from the response
       localStorage.setItem("token", token); // Save token in localStorage
-      navigate('/home');
+      setuser(response.data._id);
+      navigate('/home')
     } catch (error) {
       setMessage(error.response?.data.message || error.message);
     }

@@ -12,7 +12,7 @@ import RegisterScreen from './pages/RegisterScreen';
 import LoginScreen from './pages/LoginScreen ';
 import User from './pages/User';
 import ProtectedRoute from './components/ProtectedRoute';
-import AuthProvider from './authcontext/Authcontext';
+import UserAccountDetails from './pages/UserAccountDetails';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -31,12 +31,15 @@ function App() {
             <Route path="/register" element={<RegisterScreen />} />
             <Route path="/login" element={<LoginScreen />} />
             <Route path='/home' element={
-              <AuthProvider>
-                <ProtectedRoute>
-                  <User />
-                </ProtectedRoute>
-              </AuthProvider>
+              <ProtectedRoute>
+                <User />
+              </ProtectedRoute>
             } />
+            <Route path='/user' element={
+              <ProtectedRoute>
+                <UserAccountDetails />
+              </ProtectedRoute>
+            }/>
           </Routes>
         </div>
       </Router>
